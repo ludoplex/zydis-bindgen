@@ -160,7 +160,7 @@ class Ocaml:
             self.i += 1
             return
 
-        if name == "REQUIRED_BITS" or name == "MAX_VALUE":
+        if name in ["REQUIRED_BITS", "MAX_VALUE"]:
             return
         if name[0] == "_":
             name = self.current_name + name[1:]
@@ -213,6 +213,6 @@ if __name__ == "__main__":
             for x in c.get_children():
                 name = x.displayname[skip_prefix:]
                 if name[0].isdigit() or name in mode.reserved_keywords:
-                    name = "_" + name
+                    name = f"_{name}"
                 mode.enum_member(name, x.displayname, x.enum_value, x.brief_comment)
             mode.end_enum()
